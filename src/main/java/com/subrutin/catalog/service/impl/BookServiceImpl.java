@@ -1,9 +1,14 @@
 package com.subrutin.catalog.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.subrutin.catalog.domain.Author;
 import com.subrutin.catalog.domain.Book;
+import com.subrutin.catalog.dto.BookCreateDTO;
 import com.subrutin.catalog.dto.BookDetailDTO;
 import com.subrutin.catalog.repository.BookRepository;
 import com.subrutin.catalog.service.BookService;
@@ -25,6 +30,31 @@ public class BookServiceImpl implements BookService {
         dto.setBookTitle(book.getTitle());
         dto.setBookDescription(book.getDescription());
         return dto;
+    }
+
+    @Override
+    public List<BookDetailDTO> findBookListDetail() {
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map((b) -> {
+            BookDetailDTO dto = new BookDetailDTO();
+            dto.setBookId(b.getId());
+            dto.setAuthorName(b.getAuthor().getName());
+            dto.setBookTitle(b.getTitle());
+            dto.setBookDescription(b.getDescription());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public void createNewBook(BookCreateDTO dto) {
+        Author author = new Author();
+        author.setName(dto.getAuthorName());
+
+        Book book = new Book();
+        book.setAuthor(author);
+        book.setTitle(dto.getBookTitle());
+        book.setDescription(dto.getDescription());
+        bookRepository.save(book);
     }
 
 }

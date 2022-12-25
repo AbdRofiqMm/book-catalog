@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book-New</title>
+  </head>
+  <body>
+    <h3>Book New</h3>
+
+    <form method="POST" th:action="@{/book/new}" th:object="${bookCreateDTO}">
+      <table>
+        <tr>
+          <td>Title :</td>
+          <td><input type="text" th:field="*{bookTitle}" /></td>
+        </tr>
+        <tr>
+          <td>Author :</td>
+          <td><input type="text" th:field="*{authorName}" /></td>
+        </tr>
+        <tr>
+          <td>Description :</td>
+          <td>
+            <textarea name="description" id="" cols="20" rows="5" th:field="*{description}"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" value="Submit" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
