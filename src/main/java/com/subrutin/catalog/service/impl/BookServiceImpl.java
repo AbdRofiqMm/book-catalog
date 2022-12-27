@@ -3,7 +3,6 @@ package com.subrutin.catalog.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.subrutin.catalog.domain.Author;
@@ -55,6 +54,23 @@ public class BookServiceImpl implements BookService {
         book.setTitle(dto.getBookTitle());
         book.setDescription(dto.getDescription());
         bookRepository.save(book);
+    }
+
+    @Override
+    public void UpdateBook(Long bookId, com.subrutin.catalog.dto.BookUpdateRequestDTO dto) {
+        // Get book from repository
+        Book book = bookRepository.findBookById(bookId);
+        // update
+        book.setTitle(dto.getBookTitle());
+        book.setDescription(dto.getDescription());
+        // save
+        bookRepository.update(book);
+
+    }
+
+    @Override
+    public void deleteBook(Long bookId) {
+        bookRepository.delete(bookId);
     }
 
 }

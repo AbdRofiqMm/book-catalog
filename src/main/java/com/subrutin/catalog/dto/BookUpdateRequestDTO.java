@@ -10,13 +10,10 @@ import lombok.Data;
 
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class BookCreateDTO {
+public class BookUpdateRequestDTO {
 
     @NotBlank
     private String bookTitle;
-
-    @NotBlank
-    private String authorName;
 
     @JsonProperty("synopsis")
     private String description;
