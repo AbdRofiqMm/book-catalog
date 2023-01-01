@@ -3,9 +3,27 @@ spring:
     activate:
       on-profile:
         - dev
+  datasource:
+    hikari:
+      connection-timeout: 600000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+    url: jdbc:postgresql://127.0.0.1/book_catalog
+    username: subrutin
+    password: subrutin
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
 
 server:
-  port: 8080
+  port: 8090
+
 ---
 spring:
   config:
@@ -14,4 +32,4 @@ spring:
         - prod
 
 server:
-  port: 8090
+  port: 80
